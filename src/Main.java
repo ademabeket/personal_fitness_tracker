@@ -1,52 +1,46 @@
+import java.util.ArrayList;
+import java.util.Comparator;
+
 public class Main {
     public static void main(String[] args) {
 
-        User user1 = new User("Ademi", 17, 55.5);
-        User user2 = new User("Dana", 21, 62.0);
-        User user3 = new User("Aliya", 20, 58.3);
-        User user4 = new User("Arman", 23, 70.8);
+        ArrayList<User> users = new ArrayList<>();
 
-        WorkoutRoutine routine1 = new WorkoutRoutine("Cardio", 45);
-        WorkoutRoutine routine2 = new WorkoutRoutine("Strength", 60);
-        WorkoutRoutine routine3 = new WorkoutRoutine("Yoga", 30);
-        WorkoutRoutine routine4 = new WorkoutRoutine("HIIT", 40);
+        users.add(new User("Ademi", 17, 55.5));
+        users.add(new User("Dana", 21, 62.0));
+        users.add(new User("Aliya", 20, 58.3));
+        users.add(new User("Arman", 23, 70.8));
 
-        FitnessApp app1 = new FitnessApp("MyFitness", user1, routine1);
-        FitnessApp app2 = new FitnessApp("MyFitness", user2, routine2);
-        FitnessApp app3 = new FitnessApp("MyFitness", user3, routine3);
-        FitnessApp app4 = new FitnessApp("MyFitness", user4, routine4);
+        // PRINT ALL
+        System.out.println("All users:");
+        users.forEach(System.out::println);
 
-        app1.showDetails();
-        System.out.println("------------------");
-        app2.showDetails();
-        System.out.println("------------------");
-        app3.showDetails();
-        System.out.println("------------------");
-        app4.showDetails();
+        // SEARCH
+        System.out.println("\nSearch user Dana:");
+        for (User u : users) {
+            if (u.getName().equals("Dana")) {
+                System.out.println(u);
+            }
+        }
 
+        // FILTER
+        System.out.println("\nUsers heavier than 60 kg:");
+        for (User u : users) {
+            if (u.getWeight() > 60) {
+                System.out.println(u);
+            }
+        }
 
-        User heaviest = user1;
+        // SORT
+        System.out.println("\nSorted by weight:");
+        users.sort(Comparator.comparingDouble(User::getWeight));
+        users.forEach(System.out::println);
 
-        if (user2.getWeight() > heaviest.getWeight()) heaviest = user2;
-        if (user3.getWeight() > heaviest.getWeight()) heaviest = user3;
-        if (user4.getWeight() > heaviest.getWeight()) heaviest = user4;
+        // POLYMORPHISM
+        WorkoutRoutine cardio = new CardioWorkout(45);
+        WorkoutRoutine strength = new StrengthWorkout(60);
 
-        System.out.println("------------------");
-        System.out.println("Heaviest user: " + heaviest.getName()
-                + " (" + heaviest.getWeight() + " kg)");
-
-
-        Post post1 = new Post(user1, "Drink more water during workouts!");
-        Post post2 = new Post(user2, "Consistency is the key to success.");
-
-        post1.likePost();
-        post1.likePost();
-        post2.likePost();
-
-        System.out.println("------------------");
-        post1.displayPost();
-        System.out.println("------------------");
-        post2.displayPost();
-
+        System.out.println("\nCardio calories: " + cardio.calculateCalories());
+        System.out.println("Strength calories: " + strength.calculateCalories());
     }
 }

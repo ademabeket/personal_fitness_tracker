@@ -9,35 +9,11 @@ public class FitnessApp {
         this.routine = routine;
     }
 
-    public String getAppName() {
-        return appName;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public WorkoutRoutine getRoutine() {
-        return routine;
-    }
-
-
-    public void setAppName(String appName) {
-        this.appName = appName;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public void setRoutine(WorkoutRoutine routine) {
-        this.routine = routine;
-    }
-
     public void showDetails() {
         System.out.println("Fitness App: " + appName);
-        user.displayInfo();
+        System.out.println(user);
         routine.displayRoutine();
     }
 }
+
 
